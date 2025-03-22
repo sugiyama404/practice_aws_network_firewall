@@ -1,4 +1,4 @@
 variable "iam_role_lambda" {}
 variable "app_name" {}
-variable "api_execution_arn" {}
-variable "kendra_index_id" {}
+variable "subnet_private_subnet_1a_id" {}
+variable "lambda_sg_id" {}

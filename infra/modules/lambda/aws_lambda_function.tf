@@ -13,15 +13,15 @@ resource "aws_lambda_function" "main" {
   handler          = "index.lambda_handler"
   source_code_hash = data.archive_file.lambda.output_base64sha256
   timeout          = 30
-  runtime          = "python3.9"
+  runtime          = "python3.12"
   depends_on       = [aws_cloudwatch_log_group.lambda]
 
-  environment {
-    variables = {
-      INDEX_ID = var.kendra_index_id
-    }
+  vpc_config {
+    subnet_ids         = [aws_subnet.private_subnet.id]
+    security_group_ids = [aws_security_group.lambda_sg.id]
   }
+
   tags = {
-    Name = "${var.app_name}-lamdba"
+    Name = "${var.app_name}-lambda"
   }
 }
