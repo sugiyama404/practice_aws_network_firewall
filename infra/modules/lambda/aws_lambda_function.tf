@@ -17,8 +17,8 @@ resource "aws_lambda_function" "main" {
   depends_on       = [aws_cloudwatch_log_group.lambda]
 
   vpc_config {
-    subnet_ids         = [aws_subnet.private_subnet.id]
-    security_group_ids = [aws_security_group.lambda_sg.id]
+    subnet_ids         = [var.subnet_private_subnet_1a_id]
+    security_group_ids = [var.lambda_sg_id]
   }
 
   tags = {
