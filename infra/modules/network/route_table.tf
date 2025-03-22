@@ -24,8 +24,7 @@ resource "aws_route_table_association" "public_rt_1c" {
 resource "aws_route_table" "private_rt" {
   vpc_id = aws_vpc.main.id
   route {
-    cidr_block = "0.0.0.0/0"
-    # NATゲートウェイへダイレクトではなく、ファイアウォールエンドポイントに向ける
+    cidr_block      = "0.0.0.0/0"
     vpc_endpoint_id = element(tolist(aws_networkfirewall_firewall.main.firewall_status[0].sync_states[*].attachment[0].endpoint_id), 0)
   }
   tags = {
